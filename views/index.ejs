@@ -29,18 +29,13 @@
           "type": "pieChart",
           "layout": "fullwidth",
           "title" : "PieChart - 1"
-        },
-        {
-          "id" : 23426754202222,
-          "type": "pieChart",
-          "layout": "fullwidth",
-          "title" : "PieChart - 1"
         }
       ];
     </script>
   </head>
   <body>
     <div class="load-control-app" data-url="7777"></div>
+    <div class="spacing"></div>
     <div class="load-graph-app" data-url="8888"></div>
     <script>
       function loadPage (element) {
@@ -56,6 +51,15 @@
               element.appendChild(script);
               nonExecutableScript.parentNode.removeChild(nonExecutableScript);
             });
+
+            [].forEach.call(element.querySelectorAll("link[rel=stylesheet]"), function (nonExecutableScript) {
+              var link = document.createElement("link");
+              link.setAttribute("href", 'http://localhost:8888'+nonExecutableScript.getAttribute('href'));
+              link.setAttribute("rel", nonExecutableScript.getAttribute('rel'));
+              document.head.append(link)
+              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
+            });
+
           }
         };
         xmlHttp.open("GET", "http://localhost:8888/", true);
@@ -72,6 +76,14 @@
               script.setAttribute("src", 'http://localhost:7777'+nonExecutableScript.getAttribute('src'));
               script.setAttribute("type", "text/javascript");
               element.appendChild(script);
+              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
+            });
+
+            [].forEach.call(element.querySelectorAll("link[rel=stylesheet]"), function (nonExecutableScript) {
+              var link = document.createElement("link");
+              link.setAttribute("href", 'http://localhost:7777'+nonExecutableScript.getAttribute('href'));
+              link.setAttribute("rel", nonExecutableScript.getAttribute('rel'));
+              document.head.append(link)
               nonExecutableScript.parentNode.removeChild(nonExecutableScript);
             });
           }
