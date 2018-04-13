@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Graph Interface</title>
+  </head>
+  <body>
+    <div class="load-control-app" data-url="7777"></div>
+    <div class="load-graph-app" data-url="8888"></div>
+    <script>
+      function loadPage (element) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            element.innerHTML = xmlHttp.responseText;
+            
+            [].forEach.call(element.querySelectorAll('script'), function (nonExecutableScript) {
+              var script = document.createElement("script");
+              script.setAttribute("src", nonExecutableScript.src);
+              script.setAttribute("type", "text/javascript");
+              element.appendChild(script);
+              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
+            });
+          }
+        };
+        xmlHttp.open("GET", "http://localhost:8888/", true);
+        xmlHttp.send(null);
+      }
+      function loadPage1 (element) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            element.innerHTML = xmlHttp.responseText;
+            
+            [].forEach.call(element.querySelectorAll('script'), function (nonExecutableScript) {
+              var script = document.createElement("script");
+              script.setAttribute("src", nonExecutableScript.src);
+              script.setAttribute("type", "text/javascript");
+              element.appendChild(script);
+              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
+            });
+          }
+        };
+        xmlHttp.open("GET", "http://localhost:7777/", true);
+        xmlHttp.send(null);
+      }
+      document.querySelectorAll('.load-control-app').forEach(loadPage);
+      document.querySelectorAll('.load-graph-app').forEach(loadPage1);
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"
+      integrity="sha384-LQJt2WYLVjqR6CtPmZ7RlCwSnRxagESW5PKN9LCewWq4KnCIZIQewStnUJ/KEc+w"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js"
+      integrity="sha384-s7tOAUHnUBShLPptKaX9Zt4W4KPFr/mQ2TXWbxuY4TRv+7cl9zFzVPcR31MfzphO"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
