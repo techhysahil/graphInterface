@@ -2,106 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Graph Interface</title>
-    <script type="text/javascript">
-      window.GRAPH_INTERFACE = {};
-      window.GRAPH_INTERFACE.data = [
-        {
-          "id" : 1523544202222,
-          "type": "lineChart",
-          "layout": "halfwidth",
-          "title" : "LineChart - 12"
-        },
-        {
-          "id" : 1923578787222,
-          "type": "barChart",
-          "layout": "halfwidth",
-          "title" : "BarChart - 1"
-        },
-        {
-          "id" : 3408544202222,
-          "type": "polarChart",
-          "layout": "fullwidth",
-          "title" : "PolarChart - 1"
-        },
-        {
-          "id" : 8926754202222,
-          "type": "pieChart",
-          "layout": "fullwidth",
-          "title" : "PieChart - 1"
-        }
-      ];
-    </script>
+    <title>Microfrontends Homepage</title>
   </head>
   <body>
-    <div class="load-control-app" data-url="7777"></div>
-    <div class="spacing"></div>
-    <!-- <div class="load-graph-app" data-url="4000"></div> -->
-    <script>
-      function loadPage (element) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            element.innerHTML = xmlHttp.responseText;
-            
-            [].forEach.call(element.querySelectorAll('script[type="text/javascript"]'), function (nonExecutableScript) {
-              var script = document.createElement("script");
-              script.setAttribute("src", 'http://localhost:4000/'+nonExecutableScript.getAttribute('src'));
-              script.setAttribute("type", "text/javascript");
-              element.appendChild(script);
-              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
-            });
-
-            [].forEach.call(element.querySelectorAll("link[rel=stylesheet]"), function (nonExecutableScript) {
-              var link = document.createElement("link");
-              link.setAttribute("href", 'http://localhost:4000/'+nonExecutableScript.getAttribute('href'));
-              link.setAttribute("rel", nonExecutableScript.getAttribute('rel'));
-              document.head.append(link)
-              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
-            });
-
-          }
-        };
-        xmlHttp.open("GET", "http://localhost:4000/", true);
-        xmlHttp.send(null);
-      }
-
-      function loadPage1 (element) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            element.innerHTML = xmlHttp.responseText;
-            
-            [].forEach.call(element.querySelectorAll('script'), function (nonExecutableScript) {
-              var script = document.createElement("script");
-              script.setAttribute("src", 'http://localhost:7777'+nonExecutableScript.getAttribute('src'));
-              script.setAttribute("type", "text/javascript");
-              element.appendChild(script);
-              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
-            });
-
-            [].forEach.call(element.querySelectorAll("link[rel=stylesheet]"), function (nonExecutableScript) {
-              var link = document.createElement("link");
-              link.setAttribute("href", 'http://localhost:7777'+nonExecutableScript.getAttribute('href'));
-              link.setAttribute("rel", nonExecutableScript.getAttribute('rel'));
-              document.head.append(link)
-              nonExecutableScript.parentNode.removeChild(nonExecutableScript);
-            });
-          }
-        };
-        xmlHttp.open("GET", "http://localhost:7777/", true);
-        xmlHttp.send(null);
-      }
-      document.querySelectorAll('.load-control-app').forEach(loadPage);
-      // document.querySelectorAll('.load-graph-app').forEach(loadPage1);
-    </script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"
-      integrity="sha384-LQJt2WYLVjqR6CtPmZ7RlCwSnRxagESW5PKN9LCewWq4KnCIZIQewStnUJ/KEc+w"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js"
-      integrity="sha384-s7tOAUHnUBShLPptKaX9Zt4W4KPFr/mQ2TXWbxuY4TRv+7cl9zFzVPcR31MfzphO"
-      crossorigin="anonymous"></script>
+     <%- graphControl %>
+     <%- graphDashboard %>
   </body>
 </html>
