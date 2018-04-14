@@ -36,7 +36,7 @@
   <body>
     <div class="load-control-app" data-url="7777"></div>
     <div class="spacing"></div>
-    <div class="load-graph-app" data-url="8888"></div>
+    <!-- <div class="load-graph-app" data-url="4000"></div> -->
     <script>
       function loadPage (element) {
         var xmlHttp = new XMLHttpRequest();
@@ -44,9 +44,9 @@
           if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             element.innerHTML = xmlHttp.responseText;
             
-            [].forEach.call(element.querySelectorAll('script'), function (nonExecutableScript) {
+            [].forEach.call(element.querySelectorAll('script[type="text/javascript"]'), function (nonExecutableScript) {
               var script = document.createElement("script");
-              script.setAttribute("src", 'http://localhost:8888'+nonExecutableScript.getAttribute('src'));
+              script.setAttribute("src", 'http://localhost:4000/'+nonExecutableScript.getAttribute('src'));
               script.setAttribute("type", "text/javascript");
               element.appendChild(script);
               nonExecutableScript.parentNode.removeChild(nonExecutableScript);
@@ -54,7 +54,7 @@
 
             [].forEach.call(element.querySelectorAll("link[rel=stylesheet]"), function (nonExecutableScript) {
               var link = document.createElement("link");
-              link.setAttribute("href", 'http://localhost:8888'+nonExecutableScript.getAttribute('href'));
+              link.setAttribute("href", 'http://localhost:4000/'+nonExecutableScript.getAttribute('href'));
               link.setAttribute("rel", nonExecutableScript.getAttribute('rel'));
               document.head.append(link)
               nonExecutableScript.parentNode.removeChild(nonExecutableScript);
@@ -62,9 +62,10 @@
 
           }
         };
-        xmlHttp.open("GET", "http://localhost:8888/", true);
+        xmlHttp.open("GET", "http://localhost:4000/", true);
         xmlHttp.send(null);
       }
+
       function loadPage1 (element) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
@@ -92,7 +93,7 @@
         xmlHttp.send(null);
       }
       document.querySelectorAll('.load-control-app').forEach(loadPage);
-      document.querySelectorAll('.load-graph-app').forEach(loadPage1);
+      // document.querySelectorAll('.load-graph-app').forEach(loadPage1);
     </script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"
