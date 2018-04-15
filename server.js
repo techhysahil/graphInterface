@@ -2,6 +2,10 @@ const express = require('express');
 const server = express();
 const request = require('request');
 
+var DOM={
+	js : [],
+	css : []
+};
 server.set('view engine', 'ejs');
 
 server.get('/', (req, res) =>
@@ -12,12 +16,8 @@ server.get('/', (req, res) =>
   	responses[0] = processDOM(responses[0],'http://localhost:4000/');
   	responses[1] = processDOM(responses[1],'http://localhost:7777/');
 
-  	console.log(DOM.js);
-  	console.log(DOM.css);
   	var script = "";  	
-  	var style = "";  	
-
-  	
+  	var style = "";   
 
   	var promise =  new Promise(function(resolve, reject) {
   		Promise.all(
@@ -42,17 +42,10 @@ server.get('/', (req, res) =>
   	promise.then(function(response){
   		res.render('index', {includeScripts: script, includeStyle : style, graphControl: responses[0], graphDashboard: responses[1] });
   	});
-
   }).catch(error =>
     res.send(error.message)
   )
 );
-
-
-var DOM={
-	js : [],
-	css : []
-};
 
 const getContents = (url) => new Promise((resolve, reject) => {
   request.get(url, (error, response, body) => {
