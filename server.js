@@ -32,7 +32,7 @@ server.get('/', (req, res) =>
 				  		return getContents(obj.source+obj.data)
 				  	})).then(responses =>{
 			  			responses.forEach(function(resp){
-			  				style += '<link rel="stylesheet" type="text/css">'+resp+'</link>';
+			  				style +=resp;
 			  			})
 			  			resolve();
 			  		})	
