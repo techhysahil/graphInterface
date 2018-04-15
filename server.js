@@ -6,15 +6,22 @@ server.set('view engine', 'ejs');
 
 server.get('/', (req, res) =>
   Promise.all([
-  	getContents('http://localhost:4000/'),
+  	// getContents('http://localhost:4000/'),
     getContents('http://localhost:7777/'),
   ]).then(responses =>{
   	responses[0] = processDOM(responses[0]);
-  	responses[1] = processDOM(responses[1]);
+  	// responses[1] = processDOM(responses[1]);
 
   	console.log(DOM.js);
   	console.log(DOM.css);
-  	res.render('index', { graphControl: responses[0], graphDashboard: responses[1] })
+  	var script = "";  	
+  	DOM.js.forEach(function(src){
+  		getContents('http://localhost:7777/'+src)
+  			.then(resp =>{
+  				script += '<script type="text/javascript">'+resp+'</script>';
+  				res.render('index', {includeScripts: script, graphControl: responses[0], graphDashboard: responses[1] });
+  			})
+  	})
   }).catch(error =>
     res.send(error.message)
   )
