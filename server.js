@@ -6,22 +6,43 @@ server.set('view engine', 'ejs');
 
 server.get('/', (req, res) =>
   Promise.all([
-  	// getContents('http://localhost:4000/'),
+  	getContents('http://localhost:4000/'),
     getContents('http://localhost:7777/'),
   ]).then(responses =>{
-  	responses[0] = processDOM(responses[0]);
-  	// responses[1] = processDOM(responses[1]);
+  	responses[0] = processDOM(responses[0],'http://localhost:4000/');
+  	responses[1] = processDOM(responses[1],'http://localhost:7777/');
 
   	console.log(DOM.js);
   	console.log(DOM.css);
   	var script = "";  	
-  	DOM.js.forEach(function(src){
-  		getContents('http://localhost:7777/'+src)
-  			.then(resp =>{
-  				script += '<script type="text/javascript">'+resp+'</script>';
-  				res.render('index', {includeScripts: script, graphControl: responses[0], graphDashboard: responses[1] });
-  			})
+  	var style = "";  	
+
+  	
+
+  	var promise =  new Promise(function(resolve, reject) {
+  		Promise.all(
+	  		DOM.js.map(function(obj){
+		  		return getContents(obj.source+obj.data)
+		  	})).then(responses =>{
+	  			responses.forEach(function(resp){
+	  				script += '<script type="text/javascript">'+resp+'</script>';
+	  			})
+	  			Promise.all(
+			  		DOM.css.map(function(obj){
+				  		return getContents(obj.source+obj.data)
+				  	})).then(responses =>{
+			  			responses.forEach(function(resp){
+			  				style += '<link rel="stylesheet" type="text/css">'+resp+'</link>';
+			  			})
+			  			resolve();
+			  		})	
+	  		})	
   	})
+  	
+  	promise.then(function(response){
+  		res.render('index', {includeScripts: script, includeStyle : style, graphControl: responses[0], graphDashboard: responses[1] });
+  	});
+
   }).catch(error =>
     res.send(error.message)
   )
@@ -41,7 +62,7 @@ const getContents = (url) => new Promise((resolve, reject) => {
   });
 });
 
-const processDOM = (html) => {
+const processDOM = (html,source) => {
 	var matchScript = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
 	var matchMetaTag = /<meta[\s\S]*?>[\s\S]*?/gi;
 	var matchStyle = /<link[\s\S]*?>[\s\S]*?/gi;
@@ -54,13 +75,19 @@ const processDOM = (html) => {
 	var styleArray = html.match(matchStyle);
 	scriptArray.forEach(function(obj){
 		if(getAttributeValue('src',obj)){
-			DOM.js.push(getAttributeValue('src',obj))
+			DOM.js.push({
+					source : source,
+					data : getAttributeValue('src',obj)
+				})
 		}
 	})
 
 	styleArray.forEach(function(obj){
 		if(getStyleSrc(obj) && getStyleSrc(obj).indexOf('css') > -1){
-			DOM.css.push(getStyleSrc(obj)+".css")
+			DOM.css.push({
+					source : source,
+					data : getStyleSrc(obj)+".css"
+				})
 		}
 	})
 	
