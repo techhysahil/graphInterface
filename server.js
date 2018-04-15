@@ -9,11 +9,22 @@ server.get('/', (req, res) =>
   	getContents('http://localhost:4000/'),
     getContents('http://localhost:7777/'),
   ]).then(responses =>{
+  	responses[0] = processDOM(responses[0]);
+  	responses[1] = processDOM(responses[1]);
+
+  	console.log(DOM.js);
+  	console.log(DOM.css);
   	res.render('index', { graphControl: responses[0], graphDashboard: responses[1] })
   }).catch(error =>
     res.send(error.message)
   )
 );
+
+
+var DOM={
+	js : [],
+	css : []
+};
 
 const getContents = (url) => new Promise((resolve, reject) => {
   request.get(url, (error, response, body) => {
@@ -22,6 +33,56 @@ const getContents = (url) => new Promise((resolve, reject) => {
     return resolve(body);
   });
 });
+
+const processDOM = (html) => {
+	var matchScript = /<script[\s\S]*?>[\s\S]*?<\/script>/gi;
+	var matchMetaTag = /<meta[\s\S]*?>[\s\S]*?/gi;
+	var matchStyle = /<link[\s\S]*?>[\s\S]*?/gi;
+	var matchTitle = /<title[\s\S]*?>[\s\S]*?<\/title>/gi;
+	var matchBase = /<base[\s\S]*?>[\s\S]*?/gi;
+	var matchNoScript = /<noscript[\s\S]*?>[\s\S]*?<\/noscript>/gi;
+
+	// Get Style and scripts
+	var scriptArray = html.match(matchScript);
+	var styleArray = html.match(matchStyle);
+	scriptArray.forEach(function(obj){
+		if(getAttributeValue('src',obj)){
+			DOM.js.push(getAttributeValue('src',obj))
+		}
+	})
+
+	styleArray.forEach(function(obj){
+		if(getStyleSrc(obj) && getStyleSrc(obj).indexOf('css') > -1){
+			DOM.css.push(getStyleSrc(obj)+".css")
+		}
+	})
+	
+	// Remove link,scripts,meta tags etc
+	html = 	html.replace(matchScript,"");
+	html = 	html.replace(matchStyle,"");
+	html = 	html.replace(matchMetaTag,"");
+	html = 	html.replace(matchTitle,"");
+	html = 	html.replace(matchBase,"");
+	html = 	html.replace(matchNoScript,"");
+
+	return html
+}
+
+function getStyleSrc(str){
+	return str.split("href=")[1].split(".css")[0].slice(1);
+}
+
+function getAttributeValue(attribute, source)
+{
+    var regex = RegExp("<script?\\w+(?:\\s+(?:" + attribute + "=\"([^\"]*)\")|[^\\s>]+|\\s+)*>","gi");
+    var matches;
+    while ( matches = regex.exec(source) )
+    {
+    	var a = matches[1]
+    }
+    return a
+}
+
 
 const port = process.env.PORT || 9000;
 server.listen(port, () => {
