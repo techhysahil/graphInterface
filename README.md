@@ -1,18 +1,31 @@
-## Installing:
-1. Install node packages
+# For Running Final build:
+In this build, all the files(HTML+JS+CSS) are bundled at server side and served to the browser. So finally at client side, you get only only one HTML, CSS and JS file.
+
+To run this version of app, follow below instructions:
+## Step 1:
+```javascript
+Clone Angular app : git clone https://github.com/techhysahil/angular-graph-control.git
+Clone React app : git clone https://github.com/techhysahil/graph-control.git
+Clone Final App :  git clone https://github.com/techhysahil/graphInterface.git
+``` 
+
+## Step 2:
+For Angular app, enter directory and run following command :
 ```javascript
 npm install 
+npm run build:ssr && npm run serve:ssr
 ``` 
-2. Now clone following 2 micro front end and run them on server seperately(Given instruction in each micro frontend).
-git clone https://github.com/techhysahil/graph-dashboard.git
-git clone https://github.com/techhysahil/graph-control.git
-  
-2. Run project
-Make sure you have both micro front end running. Now enter this repo and running following command.
+
+For React App, enter directory and run following command :
 ```javascript
+npm install 
+npm run start:prod
+``` 
+
+For Final APP, First switch into "production" branch and run following command :
+```javascript
+npm install 
 node server.js
 ``` 
-  Above command will execute app in http://localhost:9999/ 
 
- Now You should see working app.
-
+You app will be up and running on http://localhost:9000/
