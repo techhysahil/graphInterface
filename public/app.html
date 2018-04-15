@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><style ng-transition="my-app">.btn[_ngcontent-c0]{display:inline-block;border:1px solid #2c3e50;padding:6px 30px;margin-right:15px;cursor:pointer;background-color:#2c3e50;color:#fff}.model[_ngcontent-c0]   .fieldset[_ngcontent-c0]{margin-bottom:15px}.model[_ngcontent-c0]   .fieldset[_ngcontent-c0]   .label[_ngcontent-c0]{min-width:120px;display:inline-block}.graph-control-wrapper[_ngcontent-c0]{display:block;padding:20px 10px;overflow:auto}.action-wrapper[_ngcontent-c0]{float:right}.backdrop[_ngcontent-c0]{position:fixed;top:0;bottom:0;left:0;right:0;background-color:rgba(255,255,255,.9);padding:50px}.backdrop.hide[_ngcontent-c0]{display:none}.modal[_ngcontent-c0]{backgroundColor:#fff;borderRadius:5px;maxWidth:500px;minHeight:300px;margin:0 auto;padding:30px;position:relative}.footer[_ngcontent-c0]{position:absolute;top:10px;right:10px}</style></head><body><app-root _nghost-c0="" ng-version="5.2.9"><div _ngcontent-c0="" class="graph-control-wrapper">      
+  <div _ngcontent-c0="" class="action-wrapper">
+    <div _ngcontent-c0="" class="add-control btn">Add</div>
+    <div _ngcontent-c0="" class="edit-control btn">Edit</div>
+    <div _ngcontent-c0="" class="delete-control btn">Delete</div>
+  </div>
+  
+</div>
+
+
+<div _ngcontent-c0="" class="backdrop hide">
+  <div _ngcontent-c0="" class="modal">
+      <div _ngcontent-c0="" class="add-graph-model model">
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Title</span>
+          <input _ngcontent-c0="" type="text" value="" class="ng-untouched ng-pristine ng-valid">
+        </div>
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Graph Type</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="lineChart" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="lineChart">lineChart</option><option _ngcontent-c0="" value="barChart">barChart</option><option _ngcontent-c0="" value="polarChart">polarChart</option><option _ngcontent-c0="" value="pieChart">pieChart</option>
+          </select>
+        </div>
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Layout</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="fullwidth" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="fullwidth">fullwidth</option><option _ngcontent-c0="" value="halfwidth">halfwidth</option>
+          </select>
+        </div>
+
+        <div _ngcontent-c0="" class="add-graph btn">Add Graph</div>
+      </div>
+
+      <div _ngcontent-c0="" class="footer">
+        <button _ngcontent-c0="">Close</button>
+      </div>
+  </div>
+</div>
+
+
+<div _ngcontent-c0="" class="backdrop hide">
+  <div _ngcontent-c0="" class="modal">
+      <div _ngcontent-c0="" class="edit-graph-model model">
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Select Graph</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="[object Object]" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="0: Object">LineChart - 12</option><option _ngcontent-c0="" value="1: Object">BarChart - 1</option><option _ngcontent-c0="" value="2: Object">PolarChart - 1</option><option _ngcontent-c0="" value="3: Object">PieChart - 1</option>
+          </select>
+        </div>
+
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Title</span>
+          <input _ngcontent-c0="" type="text" value="LineChart - 12" class="ng-untouched ng-pristine ng-valid">
+        </div>
+
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Graph Type</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="lineChart" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="lineChart">lineChart</option><option _ngcontent-c0="" value="barChart">barChart</option><option _ngcontent-c0="" value="polarChart">polarChart</option><option _ngcontent-c0="" value="pieChart">pieChart</option>
+          </select>
+        </div>
+
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Layout</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="halfwidth" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="fullwidth">fullwidth</option><option _ngcontent-c0="" value="halfwidth">halfwidth</option>
+          </select>
+        </div>
+
+        <div _ngcontent-c0="" class="add-graph btn">Save Changes</div>
+      </div>
+      <div _ngcontent-c0="" class="footer">
+        <button _ngcontent-c0="">Close</button>
+      </div>
+  </div>
+</div>
+
+
+<div _ngcontent-c0="" class="backdrop hide">
+  <div _ngcontent-c0="" class="modal">
+      <div _ngcontent-c0="" class="delete-graph-model model">
+        <div _ngcontent-c0="" class="fieldset">
+          <span _ngcontent-c0="" class="label">Select Graph</span>
+          <select _ngcontent-c0="" selectedindex="-1" value="[object Object]" class="ng-untouched ng-pristine ng-valid">
+            <!----><option _ngcontent-c0="" value="0: Object">LineChart - 12</option><option _ngcontent-c0="" value="1: Object">BarChart - 1</option><option _ngcontent-c0="" value="2: Object">PolarChart - 1</option><option _ngcontent-c0="" value="3: Object">PieChart - 1</option>
+          </select>
+        </div>
+
+        <div _ngcontent-c0="" class="add-graph btn">Delete Graph</div>
+      </div>
+      <div _ngcontent-c0="" class="footer">
+        <button _ngcontent-c0="">Close</button>
+      </div>
+  </div>
+</div>
+
+</app-root></body></html><!DOCTYPE html><html lang="en"><head></head><body><div id="root"><div class="App" data-reactroot=""><div class="chart-wrapper halfWidth"><div class="chart-title">Line Chart</div><canvas height="150" width="300"></canvas></div><div class="chart-wrapper halfWidth"><div class="chart-title">Bar Chart</div><canvas height="150" width="300"></canvas></div><div class="chart-wrapper fullWidth"><div class="chart-title">Polar Chart</div><canvas height="150" width="300"></canvas></div><div class="chart-wrapper fullWidth"><div class="chart-title">Pie Chart</div><canvas height="150" width="300"></canvas></div></div></div></body></html>

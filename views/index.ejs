@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Microfrontends Homepage</title>
     <base href="http://localhost:9000" target="_blank">
+    <link rel="stylesheet" href="css-bundle.css">
     <script type="text/javascript">
       window.GRAPH_INTERFACE = {};
       window.GRAPH_INTERFACE.data = [
@@ -33,14 +34,9 @@
         }
       ];
     </script>
-    <style type="text/css">
-      <%- includeStyle %>
-    </style>
   </head>
   <body>
-     <%- graphControl %>
-     <%- graphDashboard %>
-
-     <%- includeScripts %>
+     <%- appHTML %>
+     <script type="text/javascript" src="js-bundle.js"></script>
   </body>
 </html>
