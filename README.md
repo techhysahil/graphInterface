@@ -5,7 +5,7 @@ To run this version of app, follow below instructions:
 ## Step 1:
 ```javascript
 Clone Angular app : git clone https://github.com/techhysahil/angular-graph-control.git
-Clone React app : git clone https://github.com/techhysahil/graph-control.git
+Clone React app : git clone https://github.com/techhysahil/graph-dashboard.git
 Clone Final App :  git clone https://github.com/techhysahil/graphInterface.git
 ``` 
 
