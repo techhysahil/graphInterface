@@ -19,6 +19,7 @@ npm run build:ssr && npm run serve:ssr
 For React App, enter directory and run following command :
 ```javascript
 npm install 
+npm run build
 npm run start:prod
 ``` 
 
